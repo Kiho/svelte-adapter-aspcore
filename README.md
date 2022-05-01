@@ -14,9 +14,9 @@ Then in your `svelte.config.js`:
 import adapter from 'svelte-adapter-aspcore';
 
 export default {
-	kit: {
-	  ...
-	  adapter: adapter({
+  kit: {
+      ...
+      adapter: adapter({
       out: 'build'
     })
   }
