@@ -1,0 +1,42 @@
+{
+	"name": "svelte-adapter-aspcore",
+	"description": "SvelteKit adapter for ASP.NET Core SPA.",
+	"version": "0.2.0",
+	"main": "index.js",
+	"type": "module",
+	"scripts": {
+		"format": "npm run check-format -- --write",
+		"check-format": "prettier --check . --ignore-path .gitignore"
+	},
+	"exports": {
+		".": {
+			"import": "./index.js"
+		},
+		"./package.json": "./package.json"
+	},
+	"license": "MIT",
+	"keywords": [
+		"svelte",
+		"sveltekit",
+		"sveltekit-adapter",
+		"asp.net",
+		"dotnetcore",
+		"jering-node",
+		"iis"
+	],
+	"homepage": "https://github.com/kiho/svelte-adapter-aspcore#readme",
+	"bugs": {
+		"url": "https://github.com/kiho/svelte-adapter-aspcore/issues"
+	},
+	"peerDependencies": {
+		"@sveltejs/kit": "^1.0.0-next.292"
+	},
+	"devDependencies": {
+		"@sveltejs/kit": "^1.0.0-next.292",
+		"@types/node": "^17.0.5",
+		"prettier": "^2.4.1"
+	},
+	"dependencies": {
+		"esbuild": "^0.13.4"
+	}
+}
