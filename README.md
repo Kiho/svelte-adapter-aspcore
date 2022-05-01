@@ -15,10 +15,10 @@ import adapter from 'svelte-adapter-aspcore';
 
 export default {
 	kit: {
-		...
-		adapter: adapter({
+	  ...
+	  adapter: adapter({
       out: 'build'
     })
-	}
+  }
 };
 ```
