@@ -1,7 +1,7 @@
 {
 	"name": "svelte-adapter-aspcore",
 	"description": "SvelteKit adapter for ASP.NET Core SPA.",
-	"version": "0.2.0",
+	"version": "0.2.1",
 	"main": "index.js",
 	"type": "module",
 	"scripts": {

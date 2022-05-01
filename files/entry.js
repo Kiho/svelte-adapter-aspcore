@@ -74,8 +74,8 @@ const HttpHandler = (callback, origRequest) => {
 		}
 
 		const req = toRequest(origRequest);
-		_server
-			.respond(req, null)
+		// @ts-ignore
+		_server.respond(req)
 			.then((rendered) => toResponse(rendered))
 			.then((resp) => {
 				if (_isDebug) {
