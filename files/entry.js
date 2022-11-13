@@ -6,7 +6,8 @@ import { manifest } from 'MANIFEST';
 
 import { cleanup } from './cleanup';
 
-const _isDebug = process.env.NODE_ENV === 'development';
+// @ts-ignore - replaced at build time
+const _isDebug = DEBUG;
 
 installFetch();
 
@@ -24,10 +25,7 @@ if (_isDebug) {
  * */
 function toRequest(req) {
 	const { method, headers, rawBody: body, url: originalUrl } = req;
-	// because we proxy all requests to the render function,
-	// this header contains the URL the user requested
-	// const originalUrl = headers['x-ms-original-url'];
-	// console.log('originalUrl', originalUrl);
+  // console.log('originalUrl', originalUrl);
 	/** @type {RequestInit} */
 	const init = {
 		method,
@@ -48,8 +46,7 @@ const HttpHandler = (callback, origRequest) => {
 		}
 
     const req = toRequest(origRequest);
-		// @ts-ignore
-    _server.respond(req)
+    _server.respond(req, null)
       .then((resp) => {
 				if (resp.status == 404) {
 					callback(null, null);
