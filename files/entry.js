@@ -11,7 +11,6 @@ const _isDebug = process.env.NODE_ENV === 'development';
 installFetch();
 
 const _server = new Server(manifest);
-const _decoder = new TextDecoder();
 let _logger = null;
 
 if (_isDebug) {
@@ -42,52 +41,36 @@ function toRequest(req) {
 	return new Request(originalUrl, init);
 }
 
-/**
- * @param {Response} rendered
- * @returns {Promise<Record<string, any>>}
- */
-async function toResponse(rendered) {
-	const { status } = rendered;
-	if (status == 404) {
-		return null;
-	}
-	const resBody = new Uint8Array(await rendered.arrayBuffer());
-
-	/** @type {Record<string, string>} */
-	const resHeaders = {};
-	rendered.headers.forEach((value, key) => {
-		resHeaders[key] = value;
-	});
-
-	return {
-		status,
-		body: _decoder.decode(resBody),
-		headers: resHeaders,
-		isRaw: true
-	};
-}
-
 const HttpHandler = (callback, origRequest) => {
 	try {
 		if (_isDebug) {
 			_logger.write(`svelte request payload - ${JSON.stringify(origRequest)} \r\n`);
 		}
 
-		const req = toRequest(origRequest);
+    const req = toRequest(origRequest);
 		// @ts-ignore
-		_server.respond(req)
-			.then((rendered) => toResponse(rendered))
-			.then((resp) => {
-				if (_isDebug) {
-					_logger.write(`svelte response - ${JSON.stringify(resp)} \r\n`);
-				}
-				if (origRequest.bodyOnlyReply) {
-					callback(null, resp?.body);
+    _server.respond(req)
+      .then((resp) => {
+				if (resp.status == 404) {
+					callback(null, null);
 				} else {
-					callback(null, resp);
+					if (_isDebug) {
+						_logger.write(`svelte response - ${JSON.stringify(resp?.body)} \r\n`)
+					}
+					if (origRequest.bodyOnlyReply){
+						callback(null, resp?.body);
+					} else {
+						resp.text().then((data) => {
+							callback(null, {
+								status: resp.status,
+								headers: resp.headers,
+								body: data
+							})
+						});
+					}
 				}
-			})
-			.catch((err) => callback(err, null));
+      })
+      .catch((err) => callback(err, null));
 	} catch (err) {
 		callback(err, null);
 	}
