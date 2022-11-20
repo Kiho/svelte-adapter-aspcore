@@ -1,7 +1,7 @@
 {
 	"name": "svelte-adapter-aspcore",
 	"description": "SvelteKit adapter for ASP.NET Core SPA.",
-	"version": "0.3.0",
+	"version": "0.3.1",
 	"main": "index.js",
 	"type": "module",
 	"scripts": {
@@ -29,14 +29,14 @@
 		"url": "https://github.com/kiho/svelte-adapter-aspcore/issues"
 	},
 	"peerDependencies": {
-		"@sveltejs/kit": "^1.0.0-next.292"
+		"@sveltejs/kit": "1.0.0-next.553"
 	},
 	"devDependencies": {
-		"@sveltejs/kit": "^1.0.0-next.292",
-		"@types/node": "^17.0.5",
+		"@sveltejs/kit": "1.0.0-next.553",
+		"@types/node": "^18.11.9",
 		"prettier": "^2.4.1"
 	},
 	"dependencies": {
-		"esbuild": "^0.13.4"
+		"esbuild": "^0.15.13"
 	}
 }

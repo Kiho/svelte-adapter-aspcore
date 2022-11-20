@@ -22,4 +22,5 @@ export default {
   }
 };
 ```
+
 See the [demo application](https://github.com/Kiho/aspcore-spa-cli/tree/dotnet-6/samples/SvelteKitSample) for an example integration with the SvelteKit.

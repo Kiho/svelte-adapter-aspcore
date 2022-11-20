@@ -4,7 +4,7 @@ import esbuild from 'esbuild';
 type esBuildOptions = esbuild.BuildOptions;
 
 declare function plugin(opts?: {
-  out?: string,
+	out?: string;
 	debug?: boolean;
 	esbuildOptsFunc?: (defaultOptions: esBuildOptions) => Promise<esBuildOptions>;
 }): Adapter;

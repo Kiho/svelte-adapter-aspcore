@@ -5,9 +5,9 @@ import { fileURLToPath, URL } from 'url';
 
 export default function ({
 	out = 'build',
-	// precompress = false, //compression will be done in aspcore for performance
+	//precompress = false, //compression will be done in aspcore for performance
 	esbuildOptsFunc = null,
-	debug = false
+	debug = true
 }) {
 	const adapter = {
 		name: '@sveltejs/adapter-aspcore',
@@ -15,6 +15,8 @@ export default function ({
 			const tmp = '.svelte-kit/aspcore';
 			const entry = `${tmp}/entry.js`;
 			const staticDirectory = join(out, 'assets');
+
+			builder.log.minor(`Publishing to "${out}"`);
 
 			builder.rimraf(tmp);
 			builder.rimraf(staticDirectory);
@@ -42,6 +44,7 @@ export default function ({
 				})};\n`
 			);
 
+			/** @type {import('esbuild').BuildOptions} */
 			const defaultOptions = {
 				entryPoints: [entry],
 				outfile: join(out, 'index.cjs'),
@@ -56,7 +59,6 @@ export default function ({
 			await esbuild.build(buildOptions);
 
 			builder.log.minor('Copying assets');
-			builder.writeStatic(staticDirectory);
 			builder.writeClient(staticDirectory);
 			builder.writePrerendered(staticDirectory);
 		}
