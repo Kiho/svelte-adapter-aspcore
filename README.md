@@ -1,7 +1,5 @@
 # svelte-adapter-aspcore
 
-> :warning: WARNING: this project is considered to be in BETA until SvelteKit is available for general use and the Adapter API is stable. Please report any issues you encounter.
-
 Adapter for Svelte apps that runs an ASP.Net Core App.
 
 ## Usage
